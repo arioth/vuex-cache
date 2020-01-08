@@ -216,11 +216,9 @@ var defineCache = function (store, options) {
      * @returns {boolean}
      */
     deleteAll: function deleteAll(functionName) {
-      for (var i = 0, list = state.keys(); i < list.length; i += 1) {
-        var key = list[i];
-
+      state.forEach(function (value, key) {
         if (key.startsWith((functionName + ":"))) { state.delete(key); }
-      }
+      });
     }
 
   };

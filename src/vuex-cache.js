@@ -191,9 +191,9 @@ const defineCache = (store, options) => {
      * @returns {boolean}
      */
     deleteAll(functionName) {
-      for (var key of state.keys()) {
+      state.forEach((value, key) => {
         if (key.startsWith(`${functionName}:`)) state.delete(key)
-      }
+      })
     },
   }
 
