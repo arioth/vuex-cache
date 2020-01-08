@@ -7,7 +7,7 @@
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
   typeof define === 'function' && define.amd ? define(['exports'], factory) :
   (global = global || self, factory(global.VuexCache = {}));
-}(this, function (exports) { 'use strict';
+}(this, (function (exports) { 'use strict';
 
   /**
    * Check if value is an object.
@@ -194,7 +194,7 @@
       },
 
       /**
-       * Detele an action dispatch from cache. Returns `true` if it was deleted
+       * Delete an action dispatch from cache. Returns `true` if it was deleted
        * and `false` otherwise.
        * @returns {boolean}
        */
@@ -210,6 +210,19 @@
         }
 
         return state.delete(key);
+      },
+
+      /**
+       * Delete all the actions of a particular function from cache. Returns `true` if it was deleted
+       * and `false` otherwise.
+       * @returns {boolean}
+       */
+      deleteAll: function deleteAll(functionName) {
+        for (var i = 0, list = state.keys(); i < list.length; i += 1) {
+          var key = list[i];
+
+          if (key.startsWith((functionName + ":"))) { state.delete(key); }
+        }
       }
 
     };
@@ -357,4 +370,4 @@
 
   Object.defineProperty(exports, '__esModule', { value: true });
 
-}));
+})));

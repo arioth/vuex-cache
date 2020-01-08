@@ -192,7 +192,7 @@ var defineCache = function (store, options) {
     },
 
     /**
-     * Detele an action dispatch from cache. Returns `true` if it was deleted
+     * Delete an action dispatch from cache. Returns `true` if it was deleted
      * and `false` otherwise.
      * @returns {boolean}
      */
@@ -208,6 +208,19 @@ var defineCache = function (store, options) {
       }
 
       return state.delete(key);
+    },
+
+    /**
+     * Delete all the actions of a particular function from cache. Returns `true` if it was deleted
+     * and `false` otherwise.
+     * @returns {boolean}
+     */
+    deleteAll: function deleteAll(functionName) {
+      for (var i = 0, list = state.keys(); i < list.length; i += 1) {
+        var key = list[i];
+
+        if (key.startsWith((functionName + ":"))) { state.delete(key); }
+      }
     }
 
   };
