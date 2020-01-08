@@ -35,6 +35,7 @@ interface StoreCache {
    */
   delete(type: string, payload?: any): boolean
   delete<P extends Payload>(payloadWithType: P): boolean
+  deleteAll(functionName: string): void
 }
 
 declare module 'vuex' {
